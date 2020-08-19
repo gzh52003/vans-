@@ -12,9 +12,13 @@
     "core-js": "^3.6.5",
     "element-ui": "^2.13.2",
     "express": "^4.17.1",
+    "express-session": "^1.17.1",
+    "jsonwebtoken": "^8.5.1",
     "mongodb": "^3.6.0",
+    "svg-captcha": "^1.4.0",
     "vue": "^2.6.11",
-    "vue-router": "^3.2.0"
+    "vue-router": "^3.2.0",
+    "ws": "^7.3.1"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "~4.5.0",

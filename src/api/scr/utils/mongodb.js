@@ -63,7 +63,7 @@ async function insert(colName,data){
     const {db,client} = await connect();
     // 根据传入的合集名称获取数据库对应的合集
     const collection = db.collection(colName);
-  
+    console.log('111111111111',data)
     const result = await collection[Array.isArray(data) ? 'insertMany':'insertOne'](data)
     client.close();
     return result;

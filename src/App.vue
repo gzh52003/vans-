@@ -10,8 +10,8 @@
           后台管理系统
         </el-col>
         <el-col :span="12" style="text-align:right">
-        <el-button type="text" class="headbtn">注册</el-button>
-        <el-button type="text" class="headbtn">登陆</el-button>
+        <el-button type="text" class="headbtn" @click="reg">注册</el-button>
+        <el-button type="text" class="headbtn" @click="login">登陆</el-button>
         </el-col>
       </el-row>
     </el-header>
@@ -21,7 +21,7 @@
     <!-- 侧边栏 -->
     <el-aside width="250px">
       <el-menu style="height:100%" :default-active="activeIndex"
-      mode="vertical" background-color="rgba(36, 41, 53, 0.781)" text-color="rgb(92, 206, 250)" active-text-color="rgb(45, 94, 194)" @select="changeMenu" :default-openeds="openMenu" router>
+      mode="vertical" background-color="rgba(36, 41, 53, 0.781)" text-color="rgb(92, 206, 250)" active-text-color="rgb(45, 94, 194)" :default-openeds="openMenu" router>
       <template v-for="item in menu">
         <el-menu-item :index="item.path" :key="item.path" v-if="!item.submenu">
           <i :class="item.icon" stle="color:rgb(92, 206, 250)"></i>{{item.text}}
@@ -53,6 +53,7 @@
 </template>
 
 <script>
+
 export default {
   name:"App",
   data(){
@@ -109,6 +110,14 @@ export default {
           icon:"el-icon-document",
         }
       ]
+    }
+  },
+  methods: {
+    reg(){
+      this.$router.push('/reg')
+    },
+    login(){
+      this.$router.push('/login')
     }
   }
 }

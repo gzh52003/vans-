@@ -21,7 +21,7 @@
     <!-- 侧边栏 -->
     <el-aside width="250px">
       <el-menu style="height:100%" :default-active="activeIndex"
-      mode="vertical" background-color="rgba(36, 41, 53, 0.781)" text-color="rgb(92, 206, 250)" active-text-color="rgb(45, 94, 194)" @select="changeMenu" :default-openeds="openMenu" router>
+      mode="vertical" background-color="rgba(36, 41, 53, 0.781)" text-color="rgb(92, 206, 250)" active-text-color="rgb(80, 190, 194)" @select="changeMenu" :default-openeds="openMenu" router>
       <template v-for="item in menu">
         <el-menu-item :index="item.path" :key="item.path" v-if="!item.submenu">
           <i :class="item.icon" stle="color:rgb(92, 206, 250)"></i>{{item.text}}
@@ -144,4 +144,14 @@ body{
   background:url(../public/bg.png)no-repeat center center;
   background-size: 100% 100%;
 }
+.el-menu-item:hover{
+  background: rgba(70, 65, 90, 0.781)!important;
+}
+.is-active{
+  background: rgba(67, 68, 85, 0.781)!important;
+}
+  i {
+    color: inherit !important;
+  }
+
 </style>

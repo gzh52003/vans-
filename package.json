@@ -6,7 +6,8 @@
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
-    "start": "npm run serve"
+    "start": "npm run serve",
+    "server": "supervisor ./src/api/server.js"
   },
   "dependencies": {
     "axios": "^0.19.2",
@@ -18,6 +19,7 @@
     "mongodb": "^3.6.0",
     "svg-captcha": "^1.4.0",
     "vue": "^2.6.11",
+    "vue-cli": "^2.9.6",
     "vue-router": "^3.2.0",
     "ws": "^7.3.1"
   },

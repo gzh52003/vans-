@@ -31,63 +31,70 @@ const routes = [
   },
   {
     path: '/home',
-    component: Home
-  },
-  { // 用户管理router
-    path: '/user',
-    component: User,
-    children: [
-      {
-        path: '',
-        redirect: 'list'
-      }, {
-        path: 'list',
-        component: UserList
-      },{
-        path: 'add',
-        component : UserAdd
-      },{
-        path: 'edit',
-        component: UserEdit
-      }
-    ]
-  },{ // 商品管理router
-    path: '/goods',
-    component: Goods,
-    children: [
-      {
-        path: '',
-        redirect: 'list'
-      }, {
-        path: 'list',
-        component: GoodsList
-      },{
-        path: 'add',
-        component : GoodsAdd
-      },{
-        path: 'edit',
-        component: GoodsEdit
-      }
-    ]
-  },{ // 订单管理router
-    path: '/order',
-    component: Order,
-    children: [
-      {
-        path: '',
-        redirect: 'list'
-      }, {
-        path: 'list',
-        component: OrderList
+    component: Home,
+    children : [
+      { // 用户管理router
+        path: 'user',
+        component: User,
+        children: [
+          {
+            path: '',
+            redirect: 'list'
+          }, {
+            path: 'list',
+            component: UserList
+          },{
+            path: 'add',
+            component : UserAdd
+          },{
+            path: 'edit',
+            component: UserEdit
+          }
+        ]
+      },{ // 商品管理router
+        path: 'goods',
+        component: Goods,
+        children: [
+          {
+            path: '',
+            redirect: 'list'
+          }, {
+            name: 'goodslist',
+            path: 'list',
+            component: GoodsList
+          },{
+            path: 'add',
+            component : GoodsAdd
+          },{
+            name:'goodsEdit',
+            path: 'edit',
+            component: GoodsEdit
+          }
+        ]
+      },{ // 订单管理router
+        path: 'order',
+        component: Order,
+        children: [
+          {
+            path: '',
+            redirect: 'list'
+          }, {
+            path: 'list',
+            component: OrderList
+          }
+        ]
       }
     ]
   },{ // 登录
+    name : 'login',
     path: '/login',
     component: Login
   },{ // 注册
+    name : 'reg',
     path : '/reg',
     component:Reg
-  }
+  },
+
 ]
 
 const router = new VueRouter({

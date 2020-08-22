@@ -1,4 +1,5 @@
 <template>
+ 
   <div>
     <el-container>
       <!-- 头部 -->
@@ -59,6 +60,8 @@
             <el-breadcrumb-item :to="{ path: '/home/order' }">订单管理</el-breadcrumb-item>
           </el-breadcrumb>
           <div style="padding:20px 0;">
+           <!-- <el-calendar v-model="value" class="calendar">
+          </el-calendar> -->
             <router-view />
           </div>
           <!-- <router-view /> -->
@@ -71,9 +74,10 @@
 
 <script>
 export default {
-   name:"App",
-  data(){
-    return{
+  name:"App",
+    data() {
+      return {
+      value: new Date(),
       activeIndex:"/home",
       openMenu:[],
       menu:[
@@ -140,11 +144,27 @@ export default {
       this.$router.replace({
         name: 'login'
       })
+      }
+    }
+}
+</script>
+
+<style lang="scss">
+.el-calendar{
+  background: rgba(250, 250, 250, 0.8)!important;
+  box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
+  .el-calendar-table{
+    th{
+      font-weight: bolder;
     }
   }
-};
-</script>
-<style lang="scss">
+  .el-calendar-day{
+    text-align: center;
+    line-height: 69px;
+    font-size: 24px;
+    font-weight: bolder;
+  }
+}
 html{height: 100%;
 font-family: "Helvetica Neue",Helvetica,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","微软雅黑",Arial,sans-serif;}
 body{

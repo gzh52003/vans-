@@ -28,7 +28,7 @@
   编辑
   </el-button>
 
-  <el-button type="primary" icon="el-icon-delete" plain @click="deleteUser(scpe.row._id)">
+  <el-button type="primary" icon="el-icon-delete" plain @click="deleteUser(scope.row._id)">
   删除</el-button>
 </el-button-group>
     </template>

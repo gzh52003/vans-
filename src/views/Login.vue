@@ -52,7 +52,7 @@ body{
   margin: 0;
 }
 .el-container{
-  background: url(../../public/images/logo.jpg);
+  /* background: url(../../public/images/logo.jpg); */
   background-size: 63px;
 }
 </style>

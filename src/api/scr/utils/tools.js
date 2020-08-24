@@ -3,7 +3,7 @@ const crypto = require('crypto')
 /***
  * 默认返回数据格式
 */
-function formatData({code=1,data=[],msg='success'}={}){
+function formatData({code=1,data=[],num=6,msg='success'}={}){
     if(code === 0){
         msg = 'fail'
     }
@@ -13,6 +13,7 @@ function formatData({code=1,data=[],msg='success'}={}){
     return{
         code,
         data,
+        num,
         msg
     }
 }

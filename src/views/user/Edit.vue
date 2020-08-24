@@ -22,8 +22,7 @@
                 <el-button type="success" @click="submitForm">修改</el-button>
             </el-form-item>
         </el-form>
-    </div>
-    
+    </div>   
 </template>
 <script>
 export default {

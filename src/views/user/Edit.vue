@@ -1,29 +1,28 @@
 <template>
     <div>
         <h1>编辑用户</h1>
-        <el-from :model="ruleForm" status-icon :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm">
-            <el-form-item lable="用户名" prop="username">
-                <el-input type="text" v-bind:value="ruleFrom.username"></el-input>
+        <el-form :model="ruleForm" status-icon :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm">
+            <el-form-item label="用户名" prop="username">
+                <el-input type="text" v-bind:value="ruleForm.username"></el-input>
             </el-form-item>
-            <el-form-item label="密码" prop="pass">
-                <el-input type="password" v-model="ruleForm.pass" autocomplete="off"></el-input>
+            <el-form-item label="密码" prop="password">
+                <el-input type="password" v-model="ruleForm.password" autocomplete="off"></el-input>
             </el-form-item>
-            <el-form-item lable="性别" prop="gender">
-            <el-select v-model="ruleFrom.gender">
+            <el-form-item label="性别" prop="gender">
+            <el-select v-model="ruleForm.gender">
                 <el-option label="男" value="male"></el-option>
                 <el-option label="女" value="female"></el-option>
                 <el-option label="保密" value="dontknow"></el-option>
             </el-select> 
             </el-form-item>
-            <el-item>
-                <el-input v-model.number="ruleFrom.age"></el-input>
-            </el-item>
-            <el-form-item>
-                <el-button type="success" @click="sbmitForm">修改</el-button>
+            <el-form-item label="年龄" prop="age">
+                <el-input v-model.number="ruleForm.age"></el-input>
             </el-form-item>
-        </el-from>
-    </div>
-    
+            <el-form-item>
+                <el-button type="success" @click="submitForm">修改</el-button>
+            </el-form-item>
+        </el-form>
+    </div>   
 </template>
 <script>
 export default {
@@ -42,8 +41,8 @@ export default {
       ruleForm: {
         username: "",
         password: "",
-        gender: "male",
-        age: "",
+        gender: " ",
+        age: " ",
       },
       rules: {
         age: [
@@ -78,7 +77,7 @@ export default {
           if(data.code === 1){
               this.$message({
                 type: "success",
-                message: "修改成",
+                message: "修改成功",
             });
           }
         } else {
@@ -91,7 +90,7 @@ export default {
   async created() {
     console.log("Router=", this.$router);
     console.log("Route=", this.$route);
-    // const {a,b} = this.$route.query;
+    // const {a,b} = this.$route.query
     const { id } = this.$route.params;
     const { data } = await this.$request.get("/user/" + id);
     this.userid = id;

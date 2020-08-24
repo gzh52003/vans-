@@ -24,7 +24,7 @@ async function find(colName,query={},options={}){
     if(query._id && typeof query._id === "string"){
         query._id = ObjectId(query._id)
     }
-                    // find 如果目标是空就是查询所有
+   
     let result = collection.find(query)
     if(options.skip){
         // skip跳过指定数量

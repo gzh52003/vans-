@@ -75,7 +75,7 @@ export default {
                     if(data.code === 1){
                         this.$message({
                             type:"success",
-                            message:"添加成功"
+                            message:"添加成功",
                         })
                     }
                 }

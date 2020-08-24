@@ -47,6 +47,7 @@ const routes = [
             path: 'add',
             component : UserAdd
           },{
+            name:'userEdit',
             path: 'edit',
             component: UserEdit
           }

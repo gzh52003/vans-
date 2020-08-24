@@ -74,6 +74,7 @@ export default {
   data() {
     return {
       value: new Date(),
+
       activeIndex: "/home",
       openMenu: [],
       show: false,

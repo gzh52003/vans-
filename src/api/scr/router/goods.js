@@ -14,6 +14,14 @@ router.get('/find',async (req,res)=>{
     res.send(formatData({data:result}))
 })
 
+// 获取单个商品信息
+router.get('/find/:id',async(req,res)=>{
+    const {id} = req.params; // 通过req.params 获取前端过来id
+
+    const result = await mongo.find('vans',{_id:id});
+    res.send(formatData({data : result[0]}));
+})
+
 // 添加商品接口
 router.post('/insert',async (req,res)=>{
     let {littlename,name,price,imgurl} = req.body;
@@ -32,12 +40,12 @@ router.post('/insert',async (req,res)=>{
 
 // 修改商品接口
 router.put('/update/:id',async (req,res)=>{
-    const {id} = req.params;
-    let newData = {littlename,name,price,imgurl} = req.body;
-    console.log(newData)
+    let {id} = req.params;
+    let {littlename,name,price,imgurl} = req.body;
+    let newData = {littlename,name,price,imgurl}
     try{
-        let a = await mongo.update('vans',{_id:id},{$set:newData});
-        console.log(a)
+       await mongo.update('vans',{_id:id},{$set:newData});
+  
         res.send(formatData({data:{_id:id,...newData}}))
     }catch(err){ 
         if(err) throw err;

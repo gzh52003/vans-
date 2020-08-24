@@ -1,12 +1,11 @@
-// axios
 import axios from 'axios';
-
 const request = axios.create({
-    baseURL: '/', //基础路径
-    timeout: 3000,  //请求超时时间：3s
-})
+  baseURL: 'http://localhost:2003/api',
+  headers: {
+    'Content-Type': 'application/json',
+    
 
-// get请求
+  }
+});
 
-
-export default request
+export default request;

@@ -29,6 +29,20 @@ router.get('/', async (req, res) => {
 
 })
 
+// 获取单个商品信息
+router.get('/find/:id', async (req, res) => {
+    const {
+        id
+    } = req.params; // 通过req.params 获取前端过来id
+
+    const result = await mongo.find('user', {
+        _id: id
+    });
+    res.send(formatData({
+        data: result[0]
+    }));
+})
+
 // 添加用户接口
 router.post('/insert', async (req, res) => {
     let {

@@ -4,21 +4,30 @@
       <el-row>
         <el-col :span="16">
           <div class="grid-content bg-purple">
-            <el-form label-width="80px" :rules="rules" :model="formUrl" ref="formUrl">
+            <el-form 
+            :model="ruleForm" 
+            :rules="rules" 
+            ref="ruleForm" 
+            label-width="80px">
               <h2 :span="24" style="text-align: center;">免费注册</h2>
               <el-form-item label="用户名:" prop="username">
-                <el-input v-model="formUrl.username" style="width:90%"></el-input>
+                <el-input v-model="ruleForm.username" style="width:90%"></el-input>
               </el-form-item>
               <el-form-item label="密 码:" prop="password">
-                <el-input v-model="formUrl.password" style="width:90%" type="password"></el-input>
+                <el-input v-model="ruleForm.password" style="width:90%" type="password"></el-input>
               </el-form-item>
-              <el-form-item for="svgCode" label="验证码:" prop="vccode">
-                <el-input v-model="formUrl.vccode" style="width:70%"></el-input>
-                <el-button id="vcCode" style="width:20%">nbsp</el-button>
+              <el-form-item label="验证码:" prop="vccode">
+                <el-input v-model="ruleForm.vccode" style="width:70%"></el-input>
+                <el-button @click="getCode()" style="width:20%">nbsp</el-button>
               </el-form-item>
               <el-form-item>
-                <el-button type="primary" @click="rootHome" style="falot:left">立即注册</el-button>
-                <el-button type="text" @click="rootLogin" style="falot:right">已注册，请登录</el-button>
+                <el-button
+                  @click="submitForm('ruleForm')"
+                  native-type="submit"
+                  type="primary"
+                  style="falot:left"
+                >立即注册</el-button>
+                <el-button type="text" @click="goLogin" style="margin-left: 140px;">已注册，请登录</el-button>
               </el-form-item>
             </el-form>
           </div>
@@ -28,11 +37,10 @@
   </el-container>
 </template>
 <script>
-/* import user from "../api/scr/router/user" */
 export default {
   data() {
     return {
-      formUrl: {
+      ruleForm: {
         username: "",
         password: "",
         vccode: "",
@@ -54,29 +62,44 @@ export default {
     };
   },
   methods: {
-    rootHome() {
-      this.$router.push("/Home");
-    },
-    rootLogin() {
-      this.$router.push("/login");
+    async getCode() {
+      console.log(999);
+      const result = await this.$request.get("../filter/vcode");
+      console.log(result , 1);
     },
     submitForm(formName) {
-      this.$refs[formName].validate((valid) => {
+      this.$refs[formName].validate(async (valid) => {
         if (valid) {
-          alert("submit!");
+          const url = "/user/insert/";
+          const { ruleForm } = this;
+          const { data } = await this.$request.post(url, {
+            ...ruleForm,
+          });
+          if (data.code === 1) {
+            this.$message({
+              message: "注册成功",
+              type: "success",
+              showClose: true,
+            });
+            this.$router.push('/login');
+          } else {
+            this.$message({
+              message: "用户名或密码不能为空",
+              type: "warning",
+            });
+          }
         } else {
-          console.log("error submit!!");
           return false;
         }
       });
     },
-    resetForm(formName) {
-      this.$refs[formName].resetFields();
+    goLogin() {
+      this.$router.push("/login");
     },
   },
-  created() {
+  created () {
     
-  },
+  }
 };
 </script>
 

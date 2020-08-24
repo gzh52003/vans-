@@ -48,6 +48,9 @@ export default {
         }, ],
       };
     },
+    components:{
+          // search,
+    },
     methods:{
         async deleteUser(id){
             console.log(1);
@@ -70,15 +73,17 @@ export default {
             this.$router.push({
                 name:"userEdit",
                 params:{id},
-                query:{
-                    a:10,b:20
-                }
             })
         },
     },
     async  created(){
         console.log("List=",this);
-        let{data}=await this.$request.get("/user");
+        
+        let{data}=await this.$request.get("/user",{
+          paraams:{
+            size: 8,
+          }
+        });
         console.log(data);
         this.userlist=data.data
     }

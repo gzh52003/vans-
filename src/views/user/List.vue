@@ -6,7 +6,7 @@
     border
     style="width: 100%">
     <el-table-column
-      prop="name"
+      prop="username"
       label="姓名"
       width="200">
     </el-table-column>
@@ -42,9 +42,9 @@ export default {
       return {
         userlist: [
         {
-          name: "易洋千玺",
-          gender:"男",
-          age:"18",
+          username: "",
+          gender:"",
+          age:"",
         }, ],
       };
     },

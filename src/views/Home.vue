@@ -74,9 +74,18 @@ export default {
   data() {
     return {
       value: new Date(),
-      activeIndex:"/home",
-      openMenu:[],
-      menu:[
+
+
+      activeIndex: "/home",
+      openMenu: [],
+      show: false,
+      // open: '',
+      menu: [
+        // {
+        //   path:"/login"
+        // },{
+        //   path:"reg"
+        // },
         {
           text: "首页",
           path: "/home",
@@ -198,7 +207,7 @@ body {
     color: rgb(92, 206, 250);
     font-weight: bolder;
   }
-
+}
   .headbtn{
     color:rgb(92, 206, 250);
     font-size: 16px;}

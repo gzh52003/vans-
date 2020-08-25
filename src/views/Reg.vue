@@ -12,12 +12,18 @@
               class="demo-ruleForm"
             >
               <h2 :span="24" style="text-align: center;">免费注册</h2>
+
               <el-form-item label="用户名:" prop="username" error>
                 <el-input v-model="ruleForm.username" style="width:90%" @blur="checkUser"></el-input>
               </el-form-item>
               <el-form-item label="密 码:" prop="password">
-                <el-input v-model="ruleForm.password" style="width:90%" type="password"></el-input>
+                <el-input 
+                v-model="ruleForm.password" 
+                style="width:90%" 
+                type="password"
+                ></el-input>
               </el-form-item>
+
               <el-form-item label="验证码:" prop="vcode" v-model="vcode">
                 <el-input v-model="ruleForm.vcode" style="width:50%"></el-input>
                 <div style="display: inline-block;">
@@ -55,7 +61,11 @@
                   type="primary"
                   style="falot:left"
                 >立即注册</el-button>
-                <el-button type="text" @click="goLogin" style="margin-left: 140px;">已注册，请登录</el-button>
+                <el-button 
+                  @click="goLogin" 
+                  type="text" 
+                  style="margin-left: 140px;"
+                >已注册，请登录</el-button>
               </el-form-item>
             </el-form>
           </div>
@@ -68,6 +78,11 @@
 import changeCaptcha from '../utils/changeCapcha'
 export default {
   data() {
+    // var validateUser = async(rule , value , callback)=>{
+    //   const url = `/check?username=${this.ruleForm.username}`
+    //   const result = await this.$request.get(url)
+    //   console.log(result);
+    // }
     return {
       ruleForm: {
         username: "",
@@ -77,17 +92,9 @@ export default {
       },
       rules: {
         username: [
-          {
-            required: true,
-            message: "请输入用户名",
-            trigger: "blur",
-          },
-          {
-            min: 3,
-            max: 16,
-            message: "长度在 3 到 16 个字符",
-            trigger: "blur",
-          },
+          { required: true, message: "请输入用户名", trigger: "blur" },
+          { min: 3, max: 20, message: "长度在 3 到 20 个字符", trigger: "blur" },
+
         ],
         password: [
           { required: true, message: "请输入密码", trigger: "blur" },
@@ -110,7 +117,9 @@ export default {
     async getCode() {
       console.log(999);
       const result = await this.$request.get("../filter/vcode");
+
       console.log(result, 1);
+
     },
     async checkUser() {
       const username = this.ruleForm.username;
@@ -141,6 +150,7 @@ export default {
               type: "success",
               showClose: true,
             });
+
             setTimeout(() => {
               this.$router.push("/login");
             }, 700);

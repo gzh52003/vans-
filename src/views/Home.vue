@@ -35,7 +35,7 @@
                 <i :class="item.icon" stle="color:rgb(92, 206, 250)"></i>
                 {{item.text}}
               </el-menu-item>
-              <el-submenu :key="item.path" :index="item.path" v-else  open= '1'>
+              <el-submenu :key="item.path" :index="item.path" v-else open="1">
                 <template v-slot:title>
                   <i :class="item.icon" style="color:rgb(92, 206, 250)"></i>
                   {{item.text}}
@@ -58,7 +58,7 @@
             <el-breadcrumb-item :to="{ path: '/home/order' }">订单管理</el-breadcrumb-item>
           </el-breadcrumb>
           <div style="padding:20px 0;">
-            <el-calendar v-model="value" class="calendar" v-show="show" ></el-calendar>
+            <el-calendar v-model="value" class="calendar" v-show="show"></el-calendar>
             <router-view />
           </div>
           <!-- <router-view /> -->
@@ -149,10 +149,10 @@ export default {
     $route(to, from) {
       console.log(from.path); //从哪来
       console.log(to.path); //到哪去
-      if(this.$route.path === "/home"){
-        this.show = true
-      }else{
-        this.show = false
+      if (this.$route.path === "/home") {
+        this.show = true;
+      } else {
+        this.show = false;
       }
       // if(this.$route.path === "/home/goods/list"){
       //   // console.log
@@ -160,11 +160,11 @@ export default {
       // }
     },
   },
-  created(){
-    if(location.href === "http://localhost:8080/#/home"){
-      this.show = true
+  created() {
+    if (location.href === "http://localhost:8080/#/home") {
+      this.show = true;
     }
-  }
+  },
 };
 </script>
 

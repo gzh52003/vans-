@@ -1,5 +1,8 @@
 const {Router,json,urlencoded} = require('express');
 
+
+const repeatRouter = require('../filter/repeat')
+=======
 const session = require('express-session')
 const token = require('../utils/token')
 
@@ -22,6 +25,7 @@ router.use(session({ // 可以通过req.session 获取 存入 session的数据
 }))
 
 router.use(cors); // CORS跨域
+
 router.use(json(),urlencoded({extended:false})); // 格式化post数据
 
 
@@ -31,9 +35,13 @@ router.use('/user',userRouter);
 // 商品
 router.use('/goods',goodsRouter);
 // 验证码
+
+router.use('/filter/repeat' , repeatRouter)
+
 router.use('/vcode' , vcodeRouter);
 // 注册
 router.use('/reg',regRouter);
+
 
 // 验证token
 router.get('/jwtverify',(req,res)=>{

@@ -11,19 +11,19 @@ router.get("/", async (req, res) => {
   const options = {
     noise: 3,
     ignoreChars: "0o1il",
-    background: "#58bc58",
+    background: "#e9eef3",
     color: true,
-    fontSize: 50,
-    height: 54,
+    fontSize: 40,
+    height: 40,
+    width : 100
   };
 
   // 验证码在这里生成
   const captcha = svgCaptcha.create(options);
 
-  console.log("vcode.session=", req.session);
   // 把验证码存入会话Session
   req.session.vcode = captcha.text.toLowerCase();
-
+  console.log('4234234324342',req.session)
   res.send(formatData({ data: captcha.data }));
 });
 

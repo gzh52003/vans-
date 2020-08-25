@@ -206,7 +206,7 @@ body {
     color: rgb(92, 206, 250);
     font-weight: bolder;
   }
-
+}
   .headbtn{
     color:rgb(92, 206, 250);
     font-size: 16px;

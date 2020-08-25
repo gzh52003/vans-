@@ -81,11 +81,6 @@ export default {
       activeIndex:"/home",
       openMenu:[],
       menu:[
-        // {
-        //   path:"/login"
-        // },{
-        //   path:"reg"
-        // },
         {
           text:"首页",
           path:"/home",

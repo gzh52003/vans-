@@ -67,7 +67,7 @@ export default {
     },
     methods:{
         submitForm(){
-            this.$refs.ruleFrom.validate(async(vaild)=>{
+            this.$refs.ruleForm.validate(async(vaild)=>{
                 if(vaild){
                     const{data}=await this.$request.post("/user/insert",{
                         ...this.ruleForm
@@ -78,7 +78,7 @@ export default {
                             message:"添加成功",
                         })
                     }
-                }
+                }   
             })
         }
     }

@@ -3,7 +3,7 @@
         <h1>编辑用户</h1>
         <el-form :model="ruleForm" status-icon :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm">
             <el-form-item label="用户名" prop="username">
-                <el-input type="text" v-bind:value="ruleForm.username"></el-input>
+                <el-input type="text" v-model="ruleForm.username"></el-input>
             </el-form-item>
             <el-form-item label="密码" prop="password">
                 <el-input type="password" v-model="ruleForm.password" autocomplete="off"></el-input>
@@ -71,7 +71,7 @@ export default {
         // valid为校验结果，全部校验通过是值为true,否则为false
         if (valid) {
             const {userid,ruleForm} = this
-          const {data} = await this.$request.put("/user/"+userid,{
+          const {data} = await this.$request.put("/user/update/"+userid,{
               ...ruleForm
           });
           if(data.code === 1){
@@ -92,7 +92,9 @@ export default {
     console.log("Route=", this.$route);
     // const {a,b} = this.$route.query
     const { id } = this.$route.params;
-    const { data } = await this.$request.get("/user/" + id);
+    console.log(id);
+    const { data } = await this.$request.get("/user/find/" + id);
+    console.log(data);
     this.userid = id;
     Object.assign(this.ruleForm, data.data);
   },

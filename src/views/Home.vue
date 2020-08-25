@@ -75,6 +75,7 @@ export default {
     return {
       value: new Date(),
 
+
       activeIndex: "/home",
       openMenu: [],
       show: false,
@@ -206,11 +207,10 @@ body {
     color: rgb(92, 206, 250);
     font-weight: bolder;
   }
-
-  .headbtn {
-    color: rgb(92, 206, 250);
-    font-size: 16px;
-  }
+}
+  .headbtn{
+    color:rgb(92, 206, 250);
+    font-size: 16px;}
 }
 .main-con {
   background: url(../../public/bg.png) no-repeat center center;

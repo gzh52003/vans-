@@ -59,7 +59,7 @@ export default {
                 cancelButtonText:"取消",
                 type:"warning",
             }).then(async()=>{
-                let{data}=await this.$request.delete("/user/"+id);
+                let{data}=await this.$request.delete("/user/delete/"+id);
                 if(data.code===1){
                     this.userlist=this.userlist.filter((item)=>item._id !==id)
                     this.$message({

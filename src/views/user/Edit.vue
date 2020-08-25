@@ -71,7 +71,7 @@ export default {
         // valid为校验结果，全部校验通过是值为true,否则为false
         if (valid) {
             const {userid,ruleForm} = this
-          const {data} = await this.$request.put("/user/"+userid,{
+          const {data} = await this.$request.put("/user/update/"+userid,{
               ...ruleForm
           });
           if(data.code === 1){
@@ -92,7 +92,9 @@ export default {
     console.log("Route=", this.$route);
     // const {a,b} = this.$route.query
     const { id } = this.$route.params;
-    const { data } = await this.$request.get("/user/" + id);
+    console.log(id);
+    const { data } = await this.$request.get("/user/find/" + id);
+    console.log(data);
     this.userid = id;
     Object.assign(this.ruleForm, data.data);
   },

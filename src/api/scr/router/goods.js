@@ -6,12 +6,21 @@ const {formatData,md5} = require('../utils/tools')
 
 // 查询商品接口
 router.get('/find',async (req,res)=>{
-    let {page=1,size=10,sort="price"} = req.query
+    let {page=1,size=10,sort="price,-1",type=""} = req.query
     const skip = (page-1)*size
     const limit = size*1
     sort = sort.split(',')
-    const result = await mongo.find('vans',{},{skip,limit,sort})
-    res.send(formatData({data:result}))
+    console.log(sort)
+    let result;
+    let num;
+    if(type){
+        result = await mongo.find('vans',{classify:type},{skip,limit,sort})
+        num = await mongo.find('vans',{classify:type})
+    }else{
+        result = await mongo.find('vans',{},{skip,limit,sort})
+        num = await mongo.find('vans',{})
+    }
+    res.send(formatData({data:result,num:num.length}))
 })
 
 // 获取单个商品信息

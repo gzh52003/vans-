@@ -27,7 +27,6 @@ router.post('/',async(req,res)=>{
 // 查看用户名是否被占有
 router.get('/check',async (req,res)=>{
     const { username } = req.query
-    console.log('2312312312',username)
     const result = await mongo.find('user',{username})
     console.log(result)
     result.length > 0 ? res.send(formatData({code:0})) : res.send(formatData())

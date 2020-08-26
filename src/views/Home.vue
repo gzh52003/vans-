@@ -7,10 +7,26 @@
           <el-col :span="2" style>
             <img src="../../public/vans-logo.png" alt style="width:100%" />
           </el-col>
-          <el-col :span="10" class="logo" style="padding-left:15px">后台管理系统</el-col>
-          <el-col :span="12" style="text-align:right">
+          <el-col :span="10" class="logo" style="padding-left:15px;">后台管理系统</el-col>
+          <el-col :span="12" style="text-align:right;height:60px;line-height: 2;" class="userwrap">
+            <div style="display:inline-block;">
+              <div class="demo-basic--circle circle" @click="gotoEdit">
+                <div class="block">
+                  <el-avatar :size="40" :src="userdata.imageUrl" style="margin-top:2px;"></el-avatar>
+                  <div class="sub-title" style="font-size:12px;padding-bottom:2px;">{{userdata.username}}</div>
+                </div>
+              </div>
+            </div>
+           <span id="btn">
+              <el-button
+              type="text"
+              class="headbtn"
+              @click="quit"
+              style="margin:0px 10px 0px 10px;"
+            >退出</el-button>
             <el-button type="text" class="headbtn" @click="gotoreg">注册</el-button>
             <el-button type="text" class="headbtn" @click="gotologin">登陆</el-button>
+           </span>
           </el-col>
         </el-row>
       </el-header>
@@ -73,9 +89,10 @@ export default {
   name: "App",
   data() {
     return {
+      userdata: {
+        username: "未登录",
+      },
       value: new Date(),
-
-
       activeIndex: "/home",
       openMenu: [],
       show: false,
@@ -100,10 +117,7 @@ export default {
               text: "添加用户",
               path: "/add",
             },
-            {
-              text: "编辑用户",
-              path: "/edit",
-            },
+
             {
               text: "用户列表",
               path: "/list",
@@ -144,6 +158,18 @@ export default {
         name: "login",
       });
     },
+    quit() {
+      localStorage.removeItem("currentUser");
+      this.$router.push("/login");
+    },
+    gotoEdit(){
+      let id = this.userdata._id
+      console.log(this.userdata)
+      this.$router.push({
+        name: "userEdit",
+        params: {id},
+      });
+    }
   },
   watch: {
     $route(to, from) {
@@ -154,15 +180,27 @@ export default {
       } else {
         this.show = false;
       }
-      // if(this.$route.path === "/home/goods/list"){
-      //   // console.log
-      //   this.open = "2"
-      // }
     },
   },
-  created() {
+  async created() {
     if (location.href === "http://localhost:8080/#/home") {
       this.show = true;
+    }
+    let currentUser = JSON.parse(localStorage.getItem("currentUser"));
+    Object.assign(this.userdata, currentUser);
+    if (!currentUser) {
+      this.$router.push("/login");
+    } else {
+      // 校验token
+      const { data } = await this.$request.get("/jwtverify", {
+        params: {
+          currentUser: currentUser.authorization,
+        },
+      });
+      if (data.code == 0) {
+        localStorage.removeItem("currentUser");
+        this.$router.push("/login");
+      }
     }
   },
 };
@@ -195,8 +233,8 @@ body {
 }
 .header {
   img {
-    padding: 2px 0 0 10px;
-    margin: 5px;
+    // padding: 2px 0 0 10px;
+    // margin: 5px;
   }
   line-height: 60px;
   color: aqua;
@@ -208,12 +246,31 @@ body {
     font-weight: bolder;
   }
 }
-  .headbtn{
-    color:rgb(92, 206, 250);
-    font-size: 16px;}
+.headbtn {
+  color: rgb(92, 206, 250);
+  font-size: 16px;
 }
 .main-con {
   background: url(../../public/bg.png) no-repeat center center;
   background-size: 100% 100%;
+}
+.userwrap {
+  position: relative;
+  .circle {
+    margin-right: 150px;
+    .block{
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: center;
+    }
+  }
+}
+#btn{
+  display: flex;
+  position: absolute;
+  right: 0;
+  top: 10px;
+  z-index: 2;
 }
 </style>

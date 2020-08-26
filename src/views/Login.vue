@@ -43,7 +43,7 @@
                 </div>
               </el-form-item>
               <el-form-item>
-                <el-checkbox label="7天免登录" name="type"></el-checkbox>
+                <el-checkbox label="7天免登录" name="type"  v-model="checked" @change="change"></el-checkbox>
               </el-form-item>
               <el-form-item>
                 <el-button
@@ -71,6 +71,7 @@ export default {
         password: "",
         vcode: "",
         capFlag: true,
+        checked : true
       },
       yzm: "",
       rules: {
@@ -96,8 +97,13 @@ export default {
   },
   methods: {
     async submitForm(formName) {
-      const url = `/user?username=${this.ruleForm.username}&password=${this.ruleForm.password}`;
-      const { data } = await this.$request.get(url);
+      console.log(this.ruleForm.username,this.ruleForm.password)
+      const { data } = await this.$request.get('/login',{
+        params : {
+          ...this.ruleForm
+        }
+      });
+      // authorization
       let timer = new Date()
       timer.setDate(timer.getDate() + 1)
 
@@ -109,11 +115,8 @@ export default {
               type: "success",
               showClose: true,
             });
+            localStorage.setItem('currentUser',JSON.stringify(data.data))
             this.$router.push('/home')
-            // cookie
-            document.cookie = `usermane=${this.ruleForm.username};expires=${timer}`
-            //localStorage
-            localStorage.setItem("data" , JSON.stringify(data.data[0]))
           } else if(data.code === 0) {
             this.$message({
               message: "账号或密码错误",
@@ -136,10 +139,6 @@ export default {
     goReg() {
       this.$router.push("/reg");
     },
-
-    goReg(){
-      this.$router.push("/reg")
-    },
     changeCaptcha,
     async getCapcha() {
       // 获取验证码
@@ -148,10 +147,17 @@ export default {
         this.yzm = data.data;
       }
     },
+    change(){
+      console.log(this.checked)
+      // this.checked = this.checked ? false : true
+      
+    }
 
   },
   created() {
-    this.getCapcha()
+    this.getCapcha() // yzm
+    let authorization = localStorage.getItem('currentUser')
+    if(authorization) this.$router.push('/home')
   }
 };
 </script>

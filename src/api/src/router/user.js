@@ -49,7 +49,8 @@ router.post('/insert', async (req, res) => {
         username,
         password,
         age,
-        gender
+        gender,
+        imageUrl
     } = req.body;
     // 加密 
     password = md5(password, 'chenzhenan')
@@ -60,9 +61,9 @@ router.post('/insert', async (req, res) => {
             'username': `${username}`,
             'password': `${password}`,
             'age': `${age}`,
-            'gender': `${gender}`
+            'gender': `${gender}`,
+            'imageUrl': `${imageUrl}`
         }])
-        console.log(result)
         res.send(formatData({
             data: result.ops
         }))
@@ -84,12 +85,14 @@ router.put('/update/:id', async (req, res) => {
         username,
         password,
         age,
-        gender
+        gender,
+        imageUrl
     } = req.body
     let newData = {
         username,
         age,
-        gender
+        gender,
+        imageUrl
     }
     if (password) {
         newData.password = password = md5(password)

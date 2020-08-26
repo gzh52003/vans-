@@ -41,6 +41,7 @@ const routes = [
             path: '',
             redirect: 'list'
           }, {
+            name:'userlist',
             path: 'list',
             component: UserList
           },{

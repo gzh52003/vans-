@@ -133,10 +133,6 @@ export default {
         }
       });
     },
-    goReg() {
-      this.$router.push("/reg");
-    },
-
     goReg(){
       this.$router.push("/reg")
     },
